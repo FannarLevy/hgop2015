@@ -7,6 +7,3 @@ set -o pipefail
 # Install required components
 npm install
 bower install
-
-# Build solution (docker)
-./dockerbuild.sh
