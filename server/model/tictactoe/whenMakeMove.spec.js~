@@ -91,7 +91,7 @@ describe('when make move command', function(){
 
 
   describe("switch players after move", function(){
-    it('make a move after the other player has made his move',function(){
+    it('both players each place one legal move',function(){
       given.push({
         id:"4567",
         event:"MoveMade",
