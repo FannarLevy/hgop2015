@@ -69,4 +69,54 @@ describe('when move wins the game', function(){
 
       });
   });
+
+  describe('on player o making a move that connects 3 o in the third row', function(){
+    it('should win the game for player o',function(){
+      given.push({
+        id:"8989",
+        event:"MoveMade",
+        userName:"Fannar",
+        name:"test game",
+        x:0,
+        y:2,
+        side:'o',
+        timeStamp: "2015.12.02T11:30:50"
+      },
+      {
+        id:"8989",
+        event:"MoveMade",
+        userName:"Fannar",
+        name:"test game",
+        x:1,
+        y:2,
+        side:'o',
+        timeStamp: "2015.12.02T11:30:50"
+      });
+
+      when={
+        id:"8989",
+        comm:"MakeMove",
+        userName:"Fannar",
+        x:2,
+        y:2,
+        side:'o',
+        timeStamp: "2015.12.02T11:30:50"
+      };
+      then=[{
+        id:"8989",
+        event:"GameWon",
+        userName:"Fannar",
+        name:"test game",
+        x:2,
+        y:2,
+        side:'o',
+        timeStamp: "2015.12.02T11:30:50"
+      }];
+
+      var actualEvents = tictactoeCommandHandler(given).executeCommand(when);
+
+      JSON.stringify(actualEvents).should.be.exactly(JSON.stringify(then));
+
+      });
+  });
 });
