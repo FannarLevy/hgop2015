@@ -28,7 +28,7 @@ describe('when make move command', function(){
         userName : "Isak",
         x:0,
         y:1,
-        side:'X',
+        side:'x',
         timeStamp: "2015.12.02T11:30:50"
       };
       then=[{
@@ -38,7 +38,7 @@ describe('when make move command', function(){
         name:"test game",
         x:0,
         y:1,
-        side:'X',
+        side:'x',
         timeStamp: "2015.12.02T11:30:50"
       }];
 
@@ -57,7 +57,7 @@ describe('when make move command', function(){
         name:"test game",
         x:0,
         y:1,
-        side:'X',
+        side:'x',
         timeStamp: "2015.12.02T11:30:50"
       });
 
@@ -67,7 +67,7 @@ describe('when make move command', function(){
         userName : "Isak",
         x:0,
         y:1,
-        side:'X',
+        side:'x',
         timeStamp: "2015.12.02T11:30:50"
       };
 
@@ -78,7 +78,7 @@ describe('when make move command', function(){
         name:"test game",
         x:0,
         y:1,
-        side:'X',
+        side:'x',
         timeStamp: "2015.12.02T11:30:50"
       }];
 
@@ -99,7 +99,7 @@ describe('when make move command', function(){
         name:"test game",
         x:1,
         y:1,
-        side:'X',
+        side:'x',
         timeStamp: "2015.12.02T11:30:50"
       });
 

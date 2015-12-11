@@ -2,7 +2,9 @@ var _ = require('lodash');
 module.exports = function tictactoeCommandHandler(events) {
   var gameState = {
     gameCreatedEvent : events[0],
-    board: [['','',''],['','',''],['','','']]
+    board: [['','',''],
+            ['','',''],
+            ['','','']]
   };
 
   var eventHandlers={
@@ -30,6 +32,7 @@ module.exports = function tictactoeCommandHandler(events) {
         }];
       }
     },
+
     "JoinGame": function (cmd) {
       {
         if (gameState.gameCreatedEvent === undefined) {
@@ -49,7 +52,9 @@ module.exports = function tictactoeCommandHandler(events) {
         }];
       }
     },
+
     "MakeMove": function(cmd){
+      // Check is move has already been placed
       if(gameState.board[cmd.x][cmd.y]!==''){
         return [{
           id: cmd.id,
@@ -62,15 +67,38 @@ module.exports = function tictactoeCommandHandler(events) {
           timeStamp: cmd.timeStamp
         }]
       }
-      return [{
-        id: cmd.id,
-        event: "MoveMade",
-        userName: cmd.userName,
-        name:gameState.gameCreatedEvent.name,
-        x:cmd.x,
-        y:cmd.y,
-        side:cmd.side,
-        timeStamp: cmd.timeStamp
+      // Valid move, mark board with player site token
+      else{
+        gameState.board[cmd.x][cmd.y] = cmd.side;
+      }
+
+      // Check for vertical winnig move
+      for (var i = 0; i < 3; i++) {
+        if( (gameState.board[i][0] === cmd.side) && (gameState.board[i][1] === cmd.side) && (gameState.board[i][2] === cmd.side) )
+        {
+          return [{
+            id: cmd.id,
+            event: "GameWon",
+            userName: cmd.userName,
+            name:gameState.gameCreatedEvent.name,
+            x:cmd.x,
+            y:cmd.y,
+            side:cmd.side,
+            timeStamp: cmd.timeStamp
+          }]
+        }     
+      }      
+      
+     // Valid move
+     return [{
+       id: cmd.id,
+       event: "MoveMade",
+       userName: cmd.userName,
+       name:gameState.gameCreatedEvent.name,
+       x:cmd.x,
+       y:cmd.y,
+       side:cmd.side,
+       timeStamp: cmd.timeStamp
       }]
     }
   };
