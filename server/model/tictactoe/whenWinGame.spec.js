@@ -62,11 +62,8 @@ describe('when move wins the game', function(){
         side:'x',
         timeStamp: "2015.12.02T11:30:50"
       }];
-
       var actualEvents = tictactoeCommandHandler(given).executeCommand(when);
-
       JSON.stringify(actualEvents).should.be.exactly(JSON.stringify(then));
-
       });
   });
 
@@ -112,11 +109,56 @@ describe('when move wins the game', function(){
         side:'o',
         timeStamp: "2015.12.02T11:30:50"
       }];
-
       var actualEvents = tictactoeCommandHandler(given).executeCommand(when);
-
       JSON.stringify(actualEvents).should.be.exactly(JSON.stringify(then));
-
       });
   });
+
+  describe('on player x making a move that connects 3 x from corner to corner', function(){
+    it('should win the game for player o',function(){
+      given.push({
+        id:"4134",
+        event:"MoveMade",
+        userName:"Isak",
+        name:"test game",
+        x:0,
+        y:0,
+        side:'x',
+        timeStamp: "2015.12.02T11:30:50"
+      },
+      {
+        id:"4134",
+        event:"MoveMade",
+        userName:"Isak",
+        name:"test game",
+        x:2,
+        y:2,
+        side:'x',
+        timeStamp: "2015.12.02T11:30:50"
+      });
+
+      when={
+        id:"4134",
+        comm:"MakeMove",
+        userName:"Isak",
+        x:1,
+        y:1,
+        side:'x',
+        timeStamp: "2015.12.02T11:30:50"
+      };
+      then=[{
+        id:"4134",
+        event:"GameWon",
+        userName:"Isak",
+        name:"test game",
+        x:1,
+        y:1,
+        side:'x',
+        timeStamp: "2015.12.02T11:30:50"
+      }];
+      var actualEvents = tictactoeCommandHandler(given).executeCommand(when);
+      JSON.stringify(actualEvents).should.be.exactly(JSON.stringify(then));
+      });
+  });
+
 });

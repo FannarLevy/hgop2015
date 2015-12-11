@@ -105,6 +105,22 @@ module.exports = function tictactoeCommandHandler(events) {
           }]
         }     
       } 
+
+      // Check for diagonal winnig move
+      if(   ( (gameState.board[0][0] === cmd.side) && (gameState.board[1][1] === cmd.side) && (gameState.board[2][2] === cmd.side) )
+         || ( (gameState.board[0][2] === cmd.side) && (gameState.board[1][1] === cmd.side) && (gameState.board[2][0] === cmd.side) ))
+      {
+        return [{
+          id: cmd.id,
+          event: "GameWon",
+          userName: cmd.userName,
+          name:gameState.gameCreatedEvent.name,
+          x:cmd.x,
+          y:cmd.y,
+          side:cmd.side,
+          timeStamp: cmd.timeStamp
+        }]
+      }     
       
      // Valid move
      return [{
