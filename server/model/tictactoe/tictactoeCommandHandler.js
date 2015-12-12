@@ -2,6 +2,7 @@ var _ = require('lodash');
 module.exports = function tictactoeCommandHandler(events) {
   var gameState = {
     gameCreatedEvent : events[0],
+    moveCount : 0,
     board: [['','',''],
             ['','',''],
             ['','','']]
@@ -10,6 +11,7 @@ module.exports = function tictactoeCommandHandler(events) {
   var eventHandlers={
     'MoveMade': function(event){
       gameState.board[event.x][event.y] = event.side;
+      gameState.moveCount++;
     }
   };
 
@@ -70,12 +72,12 @@ module.exports = function tictactoeCommandHandler(events) {
       // Valid move, mark board with player site token
       else{
         gameState.board[cmd.x][cmd.y] = cmd.side;
+        gameState.moveCount++;
       }
 
       // Check for vertical winnig move
       for (var i = 0; i < 3; i++) {
-        if( (gameState.board[i][0] === cmd.side) && (gameState.board[i][1] === cmd.side) && (gameState.board[i][2] === cmd.side) )
-        {
+        if( (gameState.board[i][0] === cmd.side) && (gameState.board[i][1] === cmd.side) && (gameState.board[i][2] === cmd.side) ) {
           return [{
             id: cmd.id,
             event: "GameWon",
@@ -108,8 +110,7 @@ module.exports = function tictactoeCommandHandler(events) {
 
       // Check for diagonal winnig move
       if(   ( (gameState.board[0][0] === cmd.side) && (gameState.board[1][1] === cmd.side) && (gameState.board[2][2] === cmd.side) )
-         || ( (gameState.board[0][2] === cmd.side) && (gameState.board[1][1] === cmd.side) && (gameState.board[2][0] === cmd.side) ))
-      {
+         || ( (gameState.board[0][2] === cmd.side) && (gameState.board[1][1] === cmd.side) && (gameState.board[2][0] === cmd.side) )) {
         return [{
           id: cmd.id,
           event: "GameWon",
@@ -120,7 +121,21 @@ module.exports = function tictactoeCommandHandler(events) {
           side:cmd.side,
           timeStamp: cmd.timeStamp
         }]
-      }     
+      }
+
+     // Check for draw
+     if (gameState.moveCount === 9) {
+        return [{
+          id: cmd.id,
+          event: "GameDraw",
+          userName: cmd.userName,
+          name:gameState.gameCreatedEvent.name,
+          x:cmd.x,
+          y:cmd.y,
+          side:cmd.side,
+          timeStamp: cmd.timeStamp
+        }]
+     };
       
      // Valid move
      return [{
