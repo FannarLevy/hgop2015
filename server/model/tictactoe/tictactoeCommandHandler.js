@@ -92,8 +92,8 @@ module.exports = function tictactoeCommandHandler(events) {
       }      
 
       // Check for horizontal winnig move
-      for (var i = 0; i < 3; i++) {
-        if( (gameState.board[0][i] === cmd.side) && (gameState.board[1][i] === cmd.side) && (gameState.board[2][i] === cmd.side) )
+      for (var n = 0; n < 3; n++) {
+        if( (gameState.board[0][n] === cmd.side) && (gameState.board[1][n] === cmd.side) && (gameState.board[2][n] === cmd.side) )
         {
           return [{
             id: cmd.id,
@@ -109,8 +109,7 @@ module.exports = function tictactoeCommandHandler(events) {
       } 
 
       // Check for diagonal winnig move
-      if(   ( (gameState.board[0][0] === cmd.side) && (gameState.board[1][1] === cmd.side) && (gameState.board[2][2] === cmd.side) )
-         || ( (gameState.board[0][2] === cmd.side) && (gameState.board[1][1] === cmd.side) && (gameState.board[2][0] === cmd.side) )) {
+      if(   ( (gameState.board[0][0] === cmd.side) && (gameState.board[1][1] === cmd.side) && (gameState.board[2][2] === cmd.side) ) || ( (gameState.board[0][2] === cmd.side) && (gameState.board[1][1] === cmd.side) && (gameState.board[2][0] === cmd.side) )) {
         return [{
           id: cmd.id,
           event: "GameWon",
@@ -135,7 +134,7 @@ module.exports = function tictactoeCommandHandler(events) {
           side:cmd.side,
           timeStamp: cmd.timeStamp
         }]
-     };
+     }
       
      // Valid move
      return [{
