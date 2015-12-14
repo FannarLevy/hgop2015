@@ -4,7 +4,7 @@
 : "${1:?Need to define hostname of the deployment target}"
 
 # Are we deploying to TEST environment
-# If so we run acceptance tests after deployment
+# If so, we run acceptance tests after deployment
 : "${2:Need to set argument as TEST to run acceptance testing}"
 if [[ $2 = 'TEST' ]] ; then
   echo "Running in TEST environment"
@@ -13,7 +13,7 @@ else
 fi
 
 echo
-echo Pushing latest docker version to the test environment
+echo Pushing latest docker version to target environment
 echo
 
 # Make sure that the docker service is running on this computer
@@ -23,7 +23,6 @@ sudo service docker start
 # Exit/fail on all errors
 set -e
 set -o pipefail
-
 
 # We assume that the docker image has been built, but not pushed.
 # Push to docker from this dev machine
