@@ -2,9 +2,9 @@
 [0m[0m
 Express server listening on 9000, in test mode
 [0m  GET /api/gameHistory[0m
-[90mPOST /api/createGame [32m200 [90m11ms - 127b[0m
+[90mPOST /api/createGame [32m200 [90m12ms - 127b[0m
 [90mGET /api/gameHistory/999 [32m200 [90m3ms - 127b[0m
-[2K[0G  [32m  ✓[0m[90m should respond with JSON array with created events for game [0m[31m(97ms)[0m
+[2K[0G  [32m  ✓[0m[90m should respond with JSON array with created events for game [0m[31m(101ms)[0m
 
 [0m  In memory store[0m
 [2K[0G  [32m  ✓[0m[90m Should return empty array for unknown id [0m
@@ -26,13 +26,13 @@ Express server listening on 9000, in test mode
 [2K[0G  [32m  ✓[0m[90m should join game [0m
 [2K[0G  [32m  ✓[0m[90m should reject joining of a non-existing game [0m
 
-[0m  when make move command[0m
+[0m  when place a move command[0m
 [0m    on new game[0m
 [2K[0G    [32m  ✓[0m[90m should join game [0m
 [0m    on previous move[0m
 [2K[0G    [32m  ✓[0m[90m placing move in a field already set should be illegal [0m
 [0m    switch players after move[0m
-[2K[0G    [32m  ✓[0m[90m make a move after the other player has made his move [0m
+[2K[0G    [32m  ✓[0m[90m place a move after the other player has made his move [0m
 
 [0m  when move wins the game[0m
 [0m    on player x making a move that connects 3 x in in the first column[0m
@@ -43,5 +43,5 @@ Express server listening on 9000, in test mode
 [2K[0G    [32m  ✓[0m[90m should win the game for player o [0m
 
 
-[92m [0m[32m 17 passing[0m[90m (141ms)[0m
+[92m [0m[32m 17 passing[0m[90m (143ms)[0m
 

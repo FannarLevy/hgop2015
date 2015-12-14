@@ -45,7 +45,7 @@ describe('when move wins the game', function(){
 
       when={
         id:"4567",
-        comm:"MakeMove",
+        comm:"PlaceMove",
         userName:"Isak",
         x:0,
         y:2,
@@ -92,7 +92,7 @@ describe('when move wins the game', function(){
 
       when={
         id:"8989",
-        comm:"MakeMove",
+        comm:"PlaceMove",
         userName:"Fannar",
         x:2,
         y:2,
@@ -139,7 +139,7 @@ describe('when move wins the game', function(){
 
       when={
         id:"4134",
-        comm:"MakeMove",
+        comm:"PlaceMove",
         userName:"Isak",
         x:1,
         y:1,

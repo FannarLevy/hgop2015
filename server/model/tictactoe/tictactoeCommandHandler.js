@@ -55,7 +55,7 @@ module.exports = function tictactoeCommandHandler(events) {
       }
     },
 
-    "MakeMove": function(cmd){
+    "PlaceMove": function(cmd){
       // Check is move has already been placed
       if(gameState.board[cmd.x][cmd.y]!==''){
         return [{
