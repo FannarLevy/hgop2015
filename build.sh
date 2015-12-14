@@ -9,7 +9,7 @@ echo Installing required npm and bower components
 npm install
 bower install
 
-# Buil
+# Build
 echo Building app
 grunt
 
