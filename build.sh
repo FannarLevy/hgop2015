@@ -19,4 +19,8 @@ if [[ $rc != 0 ]] ; then
     exit $rc
 fi
 
+# Create docker image
+echo create a docker image
+./dockerbuild.sh
+
 echo "Done"
