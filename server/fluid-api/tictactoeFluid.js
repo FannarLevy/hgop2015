@@ -2,7 +2,19 @@ var should = require('should');
 var request = require('supertest');
 var acceptanceUrl = process.env.ACCEPTANCE_URL;
 
+
+
 function given(userApi) {
+
+console.log()
+console.log()
+console.log(userApi)
+console.log()
+console.log()
+
+
+  var commands = [];
+
   var _expectedEvents=[{
     "id": "1234",
     "gameId": userApi._command.gameId,
@@ -14,14 +26,22 @@ function given(userApi) {
   var _currentEvent = 0;
   var expectApi = {
     withName: function (gameName) {
+console.log("Running function withName")
       _expectedEvents[_currentEvent].name = gameName;
       return expectApi;
     },
     expect: function (eventName) {
+console.log("Running function expect")
       _expectedEvents[_currentEvent].event = eventName;
       return expectApi;
     },
+    and: function (commandEntry) {
+console.log("Running function and")
+//      _expectedEvents[_currentEvent].event = eventName;
+      return expectApi;
+    },
     isOk: function (done) {
+console.log("Running function isOk")
       var req = request(acceptanceUrl);
       req
         .post('/api/createGame')
@@ -48,9 +68,24 @@ function given(userApi) {
   return expectApi;
 }
 
+/*
+{ _command: 
+   { id: '1234',
+     gameId: 'GameId1',
+     comm: 'CreateGame',
+     userName: 'YourUser',
+     name: 'TheFirstGame',
+     timeStamp: '2014-12-02T11:29:29' },
+  createsGame: [Function],
+  named: [Function],
+  withId: [Function] }
+*/
+
 function user(userName) {
   var userApi = {
+
     _command: undefined,
+
     createsGame: function (gameId) {
       userApi._command = {
         id: "1234",
@@ -62,10 +97,32 @@ function user(userName) {
       };
       return userApi;
     },
-    withId : function(gameId){
+
+    named: function (gameName) {
+      userApi._command.name = gameName;
+//      console.log(userApi);
+      return userApi;
+    },
+
+    withId: function(gameId){
       userApi._command.gameId = gameId;
       return userApi;
+    },
+
+    joinsGame: function (gameId) {
+      userApi._command = {
+        id: "5678",
+        gameId: gameId,
+        comm: "JoinGame",
+        userName: userName,
+        //name: gameId,
+        timeStamp: "2014-12-02T11:29:29"
+      };
+//      console.log(userApi);
+      return userApi;
     }
+    
+
   };
   return userApi
 }

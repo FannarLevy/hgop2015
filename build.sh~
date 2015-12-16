@@ -9,14 +9,8 @@ echo Installing required npm and bower components
 npm install
 bower install
 
-# Build
-echo Building app
-grunt
-
-rc=$?
-if [[ $rc != 0 ]] ; then
-    echo "Grunt build failed with exit code " $rc
-    exit $rc
-fi
+# Create docker image
+echo create a docker image
+./dockerbuild.sh "$@"
 
 echo "Done"

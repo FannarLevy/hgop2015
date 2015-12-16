@@ -1,2 +1,2 @@
 #!/bin/bash
-./deploy.sh 192.168.33.20
+./deploy.sh 192.168.33.30

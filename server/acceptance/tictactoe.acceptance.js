@@ -53,10 +53,33 @@ describe('TEST ENV GET /api/gameHistory', function () {
       });
   });
 
-
-   it('Should execute fluid API test', function (done) {
-     given(user("YourUser").createsGame("TheFirstGame"))
+   // create game scenario
+   it('Should create game', function (done) {
+     given(user("YourUser").createsGame("GameIdOne").named("TheFirstGame"))
      .expect("GameCreated").withName("TheFirstGame").isOk(done);
    });
 
+/*
+   // join game scenario
+   it('Should create a game and join opponent player', function (done) {
+     given(user("YourUser").createsGame("GameIdTwo").named("TheSecondGame"))
+     .and(user("OtherUser").joinsGame("GameIdTwo"))
+     .expect("GameJoined").withName("TheSecondGame").isOk(done);
+   });
+*/
+
+/*   it('Should play game until won or drawn', function (done) {
+     given(user("YourUser").createsGame("GameIdOne").named("TheFirstGame"))
+       .and(user("OtherUser").joinsGame("GameIdOne"))
+       .and(user("YourUser").placesMove(0,0))
+       .and(user("OtherUser").placesMove(1,1))
+       .andSomeMoreMovesThatLeadToVictory
+     .expect("GameDraw").byUser("OtherUser").isOk(done);
+   });
+*/
+
+  // win scenario
+
+  // draw scenario
+   
 });
