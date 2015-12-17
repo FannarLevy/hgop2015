@@ -29,7 +29,7 @@ var tictactoeCommandHandler = require('./tictactoeCommandHandler');
         name:"test game",
         x:0,
         y:0,
-        side:'x',
+        side:'X',
         timeStamp: "2015.12.02T11:30:50"
       },
       {
@@ -39,7 +39,7 @@ var tictactoeCommandHandler = require('./tictactoeCommandHandler');
         name:"test game",
         x:1,
         y:1,
-        side:'o',
+        side:'O',
         timeStamp: "2015.12.02T11:30:50"
       },
       {
@@ -49,7 +49,7 @@ var tictactoeCommandHandler = require('./tictactoeCommandHandler');
         name:"test game",
         x:0,
         y:2,
-        side:'x',
+        side:'X',
         timeStamp: "2015.12.02T11:30:50"
       },
       {
@@ -59,7 +59,7 @@ var tictactoeCommandHandler = require('./tictactoeCommandHandler');
         name:"test game",
         x:0,
         y:1,
-        side:'o',
+        side:'O',
         timeStamp: "2015.12.02T11:30:50"
       },
       {
@@ -69,7 +69,7 @@ var tictactoeCommandHandler = require('./tictactoeCommandHandler');
         name:"test game",
         x:2,
         y:1,
-        side:'x',
+        side:'X',
         timeStamp: "2015.12.02T11:30:50"
       },
       {
@@ -79,7 +79,7 @@ var tictactoeCommandHandler = require('./tictactoeCommandHandler');
         name:"test game",
         x:1,
         y:2,
-        side:'o',
+        side:'O',
         timeStamp: "2015.12.02T11:30:50"
       },
       {
@@ -89,7 +89,7 @@ var tictactoeCommandHandler = require('./tictactoeCommandHandler');
         name:"test game",
         x:1,
         y:0,
-        side:'x',
+        side:'X',
         timeStamp: "2015.12.02T11:30:50"
       },
       {
@@ -99,7 +99,7 @@ var tictactoeCommandHandler = require('./tictactoeCommandHandler');
         name:"test game",
         x:2,
         y:0,
-        side:'o',
+        side:'O',
         timeStamp: "2015.12.02T11:30:50"
       });
 
@@ -109,7 +109,7 @@ var tictactoeCommandHandler = require('./tictactoeCommandHandler');
         userName:"Isak",
         x:2,
         y:2,
-        side:'x',
+        side:'X',
         timeStamp: "2015.12.02T11:30:50"
       };
       then=[{
@@ -119,7 +119,7 @@ var tictactoeCommandHandler = require('./tictactoeCommandHandler');
         name:"test game",
         x:2,
         y:2,
-        side:'x',
+        side:'X',
         timeStamp: "2015.12.02T11:30:50"
       }];
       var actualEvents = tictactoeCommandHandler(given).executeCommand(when);

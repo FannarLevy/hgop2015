@@ -29,7 +29,7 @@ describe('when move wins the game', function(){
         name:"test game",
         x:0,
         y:0,
-        side:'x',
+        side:'X',
         timeStamp: "2015.12.02T11:30:50"
       },
       {
@@ -39,7 +39,7 @@ describe('when move wins the game', function(){
         name:"test game",
         x:0,
         y:1,
-        side:'x',
+        side:'X',
         timeStamp: "2015.12.02T11:30:50"
       });
 
@@ -49,7 +49,7 @@ describe('when move wins the game', function(){
         userName:"Isak",
         x:0,
         y:2,
-        side:'x',
+        side:'X',
         timeStamp: "2015.12.02T11:30:50"
       };
       then=[{
@@ -59,7 +59,7 @@ describe('when move wins the game', function(){
         name:"test game",
         x:0,
         y:2,
-        side:'x',
+        side:'X',
         timeStamp: "2015.12.02T11:30:50"
       }];
       var actualEvents = tictactoeCommandHandler(given).executeCommand(when);
@@ -76,7 +76,7 @@ describe('when move wins the game', function(){
         name:"test game",
         x:0,
         y:2,
-        side:'o',
+        side:'O',
         timeStamp: "2015.12.02T11:30:50"
       },
       {
@@ -86,7 +86,7 @@ describe('when move wins the game', function(){
         name:"test game",
         x:1,
         y:2,
-        side:'o',
+        side:'O',
         timeStamp: "2015.12.02T11:30:50"
       });
 
@@ -96,7 +96,7 @@ describe('when move wins the game', function(){
         userName:"Fannar",
         x:2,
         y:2,
-        side:'o',
+        side:'O',
         timeStamp: "2015.12.02T11:30:50"
       };
       then=[{
@@ -106,7 +106,7 @@ describe('when move wins the game', function(){
         name:"test game",
         x:2,
         y:2,
-        side:'o',
+        side:'O',
         timeStamp: "2015.12.02T11:30:50"
       }];
       var actualEvents = tictactoeCommandHandler(given).executeCommand(when);
@@ -123,7 +123,7 @@ describe('when move wins the game', function(){
         name:"test game",
         x:0,
         y:0,
-        side:'x',
+        side:'X',
         timeStamp: "2015.12.02T11:30:50"
       },
       {
@@ -133,7 +133,7 @@ describe('when move wins the game', function(){
         name:"test game",
         x:2,
         y:2,
-        side:'x',
+        side:'X',
         timeStamp: "2015.12.02T11:30:50"
       });
 
@@ -143,7 +143,7 @@ describe('when move wins the game', function(){
         userName:"Isak",
         x:1,
         y:1,
-        side:'x',
+        side:'X',
         timeStamp: "2015.12.02T11:30:50"
       };
       then=[{
@@ -153,7 +153,7 @@ describe('when move wins the game', function(){
         name:"test game",
         x:1,
         y:1,
-        side:'x',
+        side:'X',
         timeStamp: "2015.12.02T11:30:50"
       }];
       var actualEvents = tictactoeCommandHandler(given).executeCommand(when);
