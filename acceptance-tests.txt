@@ -1,8 +1,8 @@
 
-
-  TEST ENV GET /api/gameHistory
-    ✓ Should have ACCEPTANCE_URL environment variable exported. 
-    ✓ should execute same test using old style (104ms)
+[0m[0m
+[0m  TEST ENV GET /api/gameHistory[0m
+[2K[0G  [32m  ✓[0m[90m Should have ACCEPTANCE_URL environment variable exported. [0m
+[2K[0G  [32m  ✓[0m[90m should execute same test using old style [0m[31m(99ms)[0m
 
 
 { _command: 
@@ -21,8 +21,8 @@
 Running function expect
 Running function withName
 Running function isOk
-    ✓ Should create game 
+[2K[0G  [32m  ✓[0m[90m Should create game [0m
 
 
-  3 passing (152ms)
+[92m [0m[32m 3 passing[0m[90m (147ms)[0m
 

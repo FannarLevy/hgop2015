@@ -12,10 +12,6 @@ else
   echo "Running in PROD enviroment"
 fi
 
-echo
-echo Pushing latest docker version to target environment
-echo
-
 # Make sure that the docker service is running on this computer
 echo Start docker on this computer
 sudo service docker start
@@ -24,19 +20,19 @@ sudo service docker start
 set -e
 set -o pipefail
 
-# We assume that the docker image has been built, but not pushed.
-# Push to docker from this dev machine
-echo Push docker image to dockerhub
-docker login -u fannarlevy
-docker push fannarlevy/tictactoe
-
 # Shut down running docker containers and ignore errors
 echo Shutdown running docker containers on target host
 ssh vagrant@$1 'docker kill tictactoe && docker rm tictactoe' || true
 
+
 # Pull from docker to target server env and run it in docker
-echo Get latest docker image and start docker on target host
-ssh vagrant@$1 'docker pull fannarlevy/tictactoe && docker run -p 9000:8080 -d --name tictactoe -e "NODE_ENV=production" fannarlevy/tictactoe' 
+if [[ $3 = 0 ]] ; then
+  echo Revision not defined, defaulting to latest docker image and start docker on target host
+  ssh vagrant@$1 'docker pull fannarlevy/tictactoe && docker run -p 9000:8080 -d --name tictactoe -e "NODE_ENV=production" fannarlevy/tictactoe'
+else
+  echo Get latests docker image $3 and start docker on target host
+  ssh vagrant@$1 'docker pull fannarlevy/tictactoe:'$3' && docker run -p 9000:8080 -d --name tictactoe -e "NODE_ENV=production" fannarlevy/tictactoe:'$3''
+fi
 
 # Run acceptance testing if TEST environment
 if [[ $2 = 'TEST' ]] ; then
