@@ -5,7 +5,7 @@
 
 # Are we deploying to TEST environment
 # If so, we run acceptance tests after deployment
-: "${2:Need to set argument as TEST to run acceptance testing}"
+: "${2: Need to set argument as TEST to run acceptance testing}"
 if [[ $2 = 'TEST' ]] ; then
   echo "Running in TEST environment"
 else
@@ -30,13 +30,13 @@ echo Push docker image to dockerhub
 docker login -u fannarlevy
 docker push fannarlevy/tictactoe
 
-# Shut down running docker containers
-echo Shutdown runnig docker containers on target host
-ssh vagrant@$1 'docker kill $(docker ps -q) && docker rm $(docker ps -a -q)'
+# Shut down running docker containers and ignore errors
+echo Shutdown running docker containers on target host
+ssh vagrant@$1 'docker kill tictactoe && docker rm tictactoe' || true
 
 # Pull from docker to target server env and run it in docker
 echo Get latest docker image and start docker on target host
-ssh vagrant@$1 'docker pull fannarlevy/tictactoe && docker run -p 9000:8080 -d -e "NODE_ENV=production" fannarlevy/tictactoe'
+ssh vagrant@$1 'docker pull fannarlevy/tictactoe && docker run -p 9000:8080 -d --name tictactoe -e "NODE_ENV=production" fannarlevy/tictactoe' 
 
 # Run acceptance testing if TEST environment
 if [[ $2 = 'TEST' ]] ; then

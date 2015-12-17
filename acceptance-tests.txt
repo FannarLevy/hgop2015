@@ -1,8 +1,8 @@
 
-[0m[0m
-[0m  TEST ENV GET /api/gameHistory[0m
-[2K[0G  [32m  ✓[0m[90m Should have ACCEPTANCE_URL environment variable exported. [0m
-[2K[0G  [32m  ✓[0m[90m should execute same test using old style [0m[31m(93ms)[0m
+
+  TEST ENV GET /api/gameHistory
+    ✓ Should have ACCEPTANCE_URL environment variable exported. 
+    ✓ should execute same test using old style (104ms)
 
 
 { _command: 
@@ -21,28 +21,8 @@
 Running function expect
 Running function withName
 Running function isOk
-[2K[0G  [32m  ✓[0m[90m Should create game [0m
+    ✓ Should create game 
 
 
-{ _command: 
-   { id: '1234',
-     gameId: 'GameIdTwo',
-     comm: 'CreateGame',
-     userName: 'YourUser',
-     name: 'TheSecondGame',
-     timeStamp: '2014-12-02T11:29:29' },
-  createsGame: [Function],
-  named: [Function],
-  withId: [Function],
-  joinsGame: [Function] }
-
-
-Running function and
-Running function expect
-Running function withName
-Running function isOk
-[2K[0G  [31m  1) Should create a game and join opponent player[0m
-
-
-[92m [0m[32m 3 passing[0m[90m (164ms)[0m
+  3 passing (152ms)
 
