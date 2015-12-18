@@ -1,13 +1,3 @@
-##Íhlutir í notkun
-Umhverfið okkar okkar samanstendur af þróunarumhverfi og prófunarumhverfi sem eru bæði uppsett
-sem VirtualBox sýndartölvur. Notast er við VirtualBox til að hýsa þessar sýndartölvur
-á meðan Vagrant (sýndartölvuumsýslukerfi) er notað til að tengjast og stýra þessum sýndartölvum.
-Hugbúnaðaðinum sjálfum er síðan pakkað í Docker gám. Þessir Docker gámar eru síðan hýstir á dockerhub
-sem er hægt að keyra upp í prófunarumhverfinu okkar án þess að þurfa að hafa áhyggjur af óstöðugleika
-í uppsetningu og keyrslu.
-
-
-
 ##Vagrant
 Lausn til að sjálfvirknivæða gerð umhverfis frá fyrirfram skilgreindri uppskrift. Einfaldar
 uppsetningu á umhverfum og kemur í veg fyrir mismun á milli umhverfa.
@@ -40,3 +30,86 @@ Samskonar lausn og npm þar sem helsti munurinn liggur í því að npm sækir "
 fyrir hverja lausn og kemur þannig í veg fyrir árekstra á milli "dependencies". Bower notast
 hinsvegar við flatan strúktúr sem mögulega þarf handvirkt þarf að stilla/lagfæra "dependencies"
 á móti kemur að biðlarar þurfa ekki að sækja sama pakkan aftur og aftur.
+
+
+
+##Íhlutir í notkun
+Umhverfið okkar okkar samanstendur af þróunarumhverfi, prófunarumhverfi og raunumhverfi sem eru uppsett
+sem VirtualBox sýndartölvur. Notast er við VirtualBox til að hýsa þessar sýndartölvur
+á meðan Vagrant (sýndartölvuumsýslukerfi) er notað til að tengjast og stýra þessum sýndartölvum.
+Hugbúnaðaðinum sjálfum er síðan pakkað í Docker gám. Þessir Docker gámar eru síðan hýstir á dockerhub
+sem er hægt að keyra upp í prófunarumhverfinu okkar án þess að þurfa að hafa áhyggjur af óstöðugleika
+í uppsetningu og keyrslu.
+
+
+
+##Day 10 - traceability, production env, and deploy any version
+**What does this give us?**
+Getum dreift eldri útgáfum af hugbúnaðinum á einfaldan hátt
+
+**Who would use the capability to track versions and why? Who would use capability to deploy any version and why?**
+Þeir sem sjá um rekstur kerfisins geta tengt vandamál við ákveðna útgáfu og lagfært með því að
+"revert" í seinustu stöðugu útgáfu.
+Prófarar geta keyrt upp eldri útgáfur af kerfinu til að bera saman og staðfesta virkni á móti
+nýjustu útgáfu.
+
+**What was wrong with having docker push in the deployment script rather than in the dockerbuild.sh script?**
+Til að sama útgáfa skili sér rétt á öll umhverfi er rétt að build ferli skilgreini þetta aðeins einu sinni
+til að tryggja samræmi milli umhverfa.
+
+**How does the "deploy any version, anywhere" build feature work? Hint: Track GIT_COMMIT**
+Hver breyting sem skilað er inn í samstæðustjórnunarkerfið fær úthlutað tætikóða (e. hash) sem notað er sem
+einkvæmt auðkenni útgáfu. Docker útgáfa er jafnframt merkt (e. tag) með þessum einkvæma tætikóða.
+Þennan einkvæma kóða er hægt að nota sem færibreytu í dreifingarferli sem sækir þá gögn sem tilheyra
+viðkomandi útgáfu.
+
+
+## Depolyment pipeline stages in jenkins
+
+###Commit stage
+```
+#!/bin/sh
+
+# To enable firefox running in grunt test
+export DISPLAY=:0
+
+# Build solution
+# Make sure that we exit in case of an error
+set -e
+set -o pipefail
+
+# Install required components
+echo Installing required npm and bower components
+npm install
+bower install
+
+# Create docker image
+echo create a docker image
+./dockerbuild.sh
+
+echo "Done"
+```
+
+###Acceptance stage
+```
+#!/bin/bash
+
+export GIT_UPSTREAM_HASH=$(<dist/githash.txt)
+env
+
+# Run deploy to test envrionment
+cd ~/src/
+./deploy.sh 192.168.33.20 TEST $GIT_COMMIT
+```
+
+###Production
+```
+#!/bin/bash
+
+export GIT_UPSTREAM_HASH=$(<dist/githash.txt)
+env
+
+# Run deploy to production envrionment
+cd ~/src/
+./deploy.sh 192.168.33.30 PROD $GIT_COMMIT
+```
